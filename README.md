@@ -1,12 +1,11 @@
-<div class="cell markdown">
-
 ### CS/ECE/ISyE 524 — Introduction to Optimization — Spring 2019
 
-# Equity Valuation and Portfolio Optimization Using Modern Portfolio Theory
+Equity Valuation and Portfolio Optimization Using Modern Portfolio Theory
+=========================================================================
 
-#### Noah Dreikosen (<njdreikosen@wisc.edu>), Cole Thomson (<cthomson4@wisc.edu>), Ritik Goyal (<ragoyal2@wisc.edu>), and Zachary Easton (<zeaston@wisc.edu>)
+#### Noah Dreikosen (<a href="mailto:njdreikosen@wisc.edu" class="email">njdreikosen@wisc.edu</a>), Cole Thomson (<a href="mailto:cthomson4@wisc.edu" class="email">cthomson4@wisc.edu</a>), Ritik Goyal (<a href="mailto:ragoyal2@wisc.edu" class="email">ragoyal2@wisc.edu</a>), and Zachary Easton (<a href="mailto:zeaston@wisc.edu" class="email">zeaston@wisc.edu</a>)
 
------
+------------------------------------------------------------------------
 
 ### Table of Contents
 
@@ -29,11 +28,8 @@
 12. [Conclusion](#5.-Conclusion)
 13. [References](#6.-References)
 
-</div>
-
-<div class="cell markdown" data-collapsed="true">
-
-## 1\. Introduction
+1. Introduction
+---------------
 
 Approximately $169 billion dollars of stocks are traded daily on the
 [New York Stock
@@ -112,11 +108,8 @@ In the coming sections mathematical models, solution code (in Julia
 1.1.0), discussion of results, and the conclusion of this optimization
 project will be available.
 
-</div>
-
-<div class="cell markdown" data-collapsed="true">
-
-## 2\. Mathematical model
+2. Mathematical model
+---------------------
 
 ### 2.A. Equity Valuation Model
 
@@ -127,29 +120,29 @@ project will be available.
 Weights of each fundamental attribute to determine the value of a
 company's stock:
 
-\[
-\begin{aligned}
-& u_j && j=1,\dots,75
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& u\_j && j=1,\\dots,75
+\\end{aligned}
+$$
 
 **Parameters:**
 
 Company *i* with fundamental attribute *j*:
 
-\[
-\begin{aligned}
-& B_{i,j} && i=1,\dots,1230 \text{ and } j=1,\dots,75
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& B\_{i,j} && i=1,\\dots,1230 \\text{ and } j=1,\\dots,75
+\\end{aligned}
+$$
 
 Market capitalization of company *i*:
 
-\[
-\begin{aligned}
-& y_i && i=1,\dots,1230
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& y\_i && i=1,\\dots,1230
+\\end{aligned}
+$$
 
 **Constraints:**
 
@@ -165,21 +158,21 @@ predicted by our model (*B x u*).
 
 **Full Model:**
 
-\[
-\begin{bmatrix}
-  b_{1,1} & \dots & b_{1,75} \\
-  \vdots & \ddots & \vdots \\
-  b_{1232,1} & \dots & b_{1232,75}
-\end{bmatrix}
-\begin{bmatrix} u_{1} \\ \vdots \\ u_{75} \end{bmatrix} =
-\begin{bmatrix} y_{1} \\ \vdots \\ y_{1230} \end{bmatrix}
-\]
+$$
+\\begin{bmatrix}
+  b\_{1,1} & \\dots & b\_{1,75} \\\\
+  \\vdots & \\ddots & \\vdots \\\\
+  b\_{1232,1} & \\dots & b\_{1232,75}
+\\end{bmatrix}
+\\begin{bmatrix} u\_{1} \\\\ \\vdots \\\\ u\_{75} \\end{bmatrix} =
+\\begin{bmatrix} y\_{1} \\\\ \\vdots \\\\ y\_{1230} \\end{bmatrix}
+$$
 
-\[
-\begin{aligned}
-\underset{u}{\text{minimize}}\qquad& {||y-Bu||}^2\\
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+\\underset{u}{\\text{minimize}}\\qquad& {\|\|y-Bu\|\|}^2\\\\
+\\end{aligned}
+$$
 
 ### 2.B. Markowitz Modern Portfolio Model
 
@@ -189,48 +182,48 @@ predicted by our model (*B x u*).
 
 Proportion of total portfolio to invest in equity *i*:
 
-\[
-\begin{aligned}
-& X_i && i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& X\_i && i=1,\\dots,306
+\\end{aligned}
+$$
 
 **Parameters:**
 
 Expected daily return of equity *i* as a percentage:
 
-\[
-\begin{aligned}
-& \mu_i && i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& \\mu\_i && i=1,\\dots,306
+\\end{aligned}
+$$
 
 Covariance between equity *i* and equity *j* (used to measure risk):
 
-\[
-\begin{aligned}
-& \Sigma_i && i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& \\Sigma\_i && i=1,\\dots,306
+\\end{aligned}
+$$
 
 Percent difference between the estimated value of the company and the
 current market capitalization of the company (obtained from Equity
 Valuation Model):
 
-\[
-\begin{aligned}
-& {\Delta}_i && i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& {\\Delta}\_i && i=1,\\dots,306
+\\end{aligned}
+$$
 
 Tradeoff weights for covariance matrix (risk) and the percent under/over
 valued determined by the Equity Valuation Model:
 
-\[
-\begin{aligned}
-& \lambda_1 && \lambda_2
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& \\lambda\_1 && \\lambda\_2
+\\end{aligned}
+$$
 
 **Constraints:**
 
@@ -238,38 +231,38 @@ valued determined by the Equity Valuation Model:
 non-negative, and no single investment may exceed 20% of the total
 portfolio:
 
-\[
-\begin{aligned}
-& 0 \le X_i \le 0.2 && i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& 0 \\le X\_i \\le 0.2 && i=1,\\dots,306
+\\end{aligned}
+$$
 
 The portfolio is allocated to 100% capacity:
 
-\[
-\begin{aligned}
-& \sum_{i=1}^{306}X_i = 1
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& \\sum\_{i=1}^{306}X\_i = 1
+\\end{aligned}
+$$
 
 **For Short-only Portfolio:**
 
 The amount invested in each company must be non-positive, and no single
 investment may exceed 20% of the total portfolio:
 
-\[
-\begin{aligned}
-& -0.2 \le X_i \le 0 && i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& -0.2 \\le X\_i \\le 0 && i=1,\\dots,306
+\\end{aligned}
+$$
 
 The portfolio is allocated to 100% capacity:
 
-\[
-\begin{aligned}
-& \sum_{i=1}^{306}X_i = -1
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+& \\sum\_{i=1}^{306}X\_i = -1
+\\end{aligned}
+$$
 
 **Objective:**
 
@@ -286,29 +279,26 @@ will be chosen depending on a person's risk tolerance.
 
 Model for Long Portfolio:
 
-\[
-\begin{aligned}
-\underset{x}{\text{minimize}}\qquad& -({\mu^\intercal}x)+\lambda_{1}({x^\intercal}({\Sigma}x))-\lambda_{2}({\Delta^\intercal}x)\\
-\text{subject to:}\qquad& \sum{x} = 1\\
-& 0 \le x_i \le 0.2 \quad i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+\\underset{x}{\\text{minimize}}\\qquad& -({\\mu^\\intercal}x)+\\lambda\_{1}({x^\\intercal}({\\Sigma}x))-\\lambda\_{2}({\\Delta^\\intercal}x)\\\\
+\\text{subject to:}\\qquad& \\sum{x} = 1\\\\
+& 0 \\le x\_i \\le 0.2 \\quad i=1,\\dots,306
+\\end{aligned}
+$$
 
 Model for Short-only Portfolio:
 
-\[
-\begin{aligned}
-\underset{x}{\text{minimize}}\qquad& -({\mu^\intercal}x)+\lambda_{1}({x^\intercal}({\Sigma}x))-\lambda_{2}({\Delta^\intercal}x)\\
-\text{subject to:}\qquad& \sum{x} = -1\\
-& -0.2 \le x_i \le 0 \quad i=1,\dots,306
-\end{aligned}
-\]
+$$
+\\begin{aligned}
+\\underset{x}{\\text{minimize}}\\qquad& -({\\mu^\\intercal}x)+\\lambda\_{1}({x^\\intercal}({\\Sigma}x))-\\lambda\_{2}({\\Delta^\\intercal}x)\\\\
+\\text{subject to:}\\qquad& \\sum{x} = -1\\\\
+& -0.2 \\le x\_i \\le 0 \\quad i=1,\\dots,306
+\\end{aligned}
+$$
 
-</div>
-
-<div class="cell markdown" data-collapsed="true">
-
-## 3\. Solution
+3. Solution
+-----------
 
 To expand on the possibilities for an optimal portfolio, we decided to
 construct both an optimal long position portfolio as well as an optimal
@@ -316,9 +306,9 @@ short position portfolio. A fund manager may desire to allocate a
 portfolio to only short-positions to hedge themselves against their long
 positions and/or possible economic factors like a recession that might
 pull many of the stocks in the market lower. The traditional
-“buy-and-hold” investor may find that the long-only optimal portfolio
-is better suited for their needs. In addition, the short portfolio is
-neglecting some important as&#12; pects of borrowing shares including:
+“buy-and-hold” investor may find that the long-only optimal portfolio is
+better suited for their needs. In addition, the short portfolio is
+neglecting some important as pects of borrowing shares including:
 borrowing rates, availability of shares to borrow, potential margin
 calls, etc. The potential loss on a short investment is theoretically
 unbounded, but we do not discuss these assumptions and technicalities in
@@ -370,16 +360,8 @@ were then constructed using the test set. Under the assumption that the
 portfolio was held for a year, we analyzed the results using the
 validation set.
 
-</div>
-
-<div class="cell code">
-
 ``` julia
 ```
-
-</div>
-
-<div class="cell code" data-execution_count="23">
 
 ``` julia
 # Helper function to calculate total profits and portfolio returns as a percent for each company 
@@ -432,15 +414,7 @@ function check_profits(ix, amount, prices_test, prices_val, xsol)
 end
 ```
 
-<div class="output execute_result" data-execution_count="23">
-
     check_profits (generic function with 1 method)
-
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="24">
 
 ``` julia
 # Calculates the bias offset (difference) between the predicted valuation and actual valuation of a company while training the linear regression model.
@@ -472,15 +446,7 @@ function get_bias_diff(train, coeffs, test)
 end
 ```
 
-<div class="output execute_result" data-execution_count="24">
-
     get_bias_diff (generic function with 1 method)
-
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="25">
 
 ``` julia
 # Helper function to calculate difference between expected prices calculated by the model and actual prices as a percent
@@ -506,15 +472,7 @@ function get_diff_expected_prices(coeffs, raw_test, test_company_num)
 end
 ```
 
-<div class="output execute_result" data-execution_count="25">
-
     get_diff_expected_prices (generic function with 1 method)
-
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="26">
 
 ``` julia
 # Helper function that takes in dataframe and returns columns 3 thru 76, normalized as a matrix.
@@ -545,15 +503,7 @@ function normalize(data)
 end
 ```
 
-<div class="output execute_result" data-execution_count="26">
-
     normalize (generic function with 1 method)
-
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="27">
 
 ``` julia
 # Helper Function to normalize test data by scaling with the same factor as train data.
@@ -569,15 +519,7 @@ function re_normalize(test)
 end
 ```
 
-<div class="output execute_result" data-execution_count="27">
-
     re_normalize (generic function with 1 method)
-
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="28">
 
 ``` julia
 # CSV used to read in data from .csv files.
@@ -592,8 +534,6 @@ raw_val = CSV.read(file3);
 # Merge the data into one dataframe. We will use this in our least squares model.
 raw = vcat(raw_train, raw_test, raw_val)
 ```
-
-<div class="output execute_result" data-execution_count="28">
 
     1230×78 DataFrame. Omitted printing of 75 columns
     │ Row  │ Ticker Symbol │ Period Ending │ Accounts Payable │
@@ -622,12 +562,6 @@ raw = vcat(raw_train, raw_test, raw_val)
     │ 1229 │ YUM           │ 2015-12-26    │ 2165000000       │
     │ 1230 │ ZBH           │ 2015-12-31    │ 432000000        │
 
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="29">
-
 ``` julia
 using Statistics
 # Normalize the data from the files into matrix B for the model
@@ -641,10 +575,6 @@ shares = raw[:77]
 mkt_cap = prices.*shares
 y = mkt_cap;
 ```
-
-</div>
-
-<div class="cell code" data-execution_count="30">
 
 ``` julia
 # Equity Valuation Model
@@ -669,16 +599,8 @@ coeffs = getvalue(u)
 println("Coefficient weights: ", coeffs)
 ```
 
-<div class="output stream stdout">
-
     Optimal
     Coefficient weights: [-5.52662e14, 1.16507e10, -7.44934e10, -1.62888e11, 7.7802e12, 7.46124e10, 4.09376e9, 2.17528e11, 2.28959e10, 1.28349e10, 4.64297e12, -9.43487e9, 1.78499e11, -2.5365e11, 2.11437e11, 2.27914e13, -2.26833e13, 6.21952e9, -5.27838e10, 2.11628e12, 7.85458e11, 1.08062e10, 1.91159e12, 3.06959e10, 1.00392e12, -1.47748e12, -1.01068e10, 7.78183e12, 1.63795e11, -2.4329e11, 1.35878e12, -1.48416e11, -6.67235e9, 1.78606e11, -5.54145e11, 3.71803e11, 1.18462e11, -1.38982e12, -1.39441e12, 1.15752e11, 1.74413e12, -4.87292e10, -1.17391e10, 3.88778e10, 2.3876e11, -7.28409e10, 1.90456e11, -1.80126e10, -3.04466e14, -1.10013e9, 1.23101e10, 2.21372e12, -1.92899e11, 2.93459e10, -4.95802e10, 1.15052e11, 1.69296e11, 5.18205e10, 4.04073e9, -3.99459e10, 2.23452e11, 1.75842e10, 3.95502e10, -3.9155e14, 2.73132e11, -2.97284e12, 9.83579e11, 7.49975e14, -1.77718e12, -2.27975e12, 3.97454e12, -6.28953e12, -3.56524e10, -4.62922e9, -1.15785e9]
-
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="31">
 
 ``` julia
 #If you don't want to run the previous optimization problem, here's the results from when we ran it.
@@ -687,17 +609,9 @@ println("Coefficient weights: ", coeffs)
 #coeffs = [-5.5266e14, 1.16507e10, -7.44934e10, -1.62888e11, 7.7802e12, 7.46124e10, 4.09376e9, 2.17528e11, 2.28959e10, 1.28349e10, 4.64297e12, -9.43487e9, 1.78499e11, -2.5365e11, 2.11437e11, 2.27914e13, -2.26833e13, 6.21953e9, -5.27838e10, 2.11628e12, 7.85458e11, 1.08062e10, 1.91159e12, 3.06959e10, 1.00392e12, -1.47748e12, -1.01067e10, 7.78183e12, 1.63795e11, -2.4329e11, 1.35878e12, -1.48416e11, -6.67235e9, 1.78606e11, -5.54145e11, 3.71803e11, 1.18463e11, -1.38982e12, -1.39441e12, 1.15752e11, 1.74413e12, -4.87292e10, -1.17389e10, 3.88778e10, 2.3876e11, -7.28409e10, 1.90456e11, -1.80126e10, -3.04465e14, -1.10013e9, 1.23101e10, 2.21372e12, -1.92899e11, 2.93459e10, -4.95802e10, 1.15052e11, 1.69296e11, 5.18205e10, 4.04073e9, -3.99459e10, 2.23452e11, 1.75842e10, 3.95502e10, -3.91548e14, 2.73132e11, -2.97284e12, 9.83579e11, 7.49972e14, -1.77718e12, -2.27975e12, 3.97454e12, -6.28953e12, -3.56524e10, -4.62922e9, -1.15785e9];
 ```
 
-</div>
-
-<div class="cell code" data-execution_count="32">
-
 ``` julia
 bias = get_bias_diff(raw_train, coeffs, raw_test);
 ```
-
-</div>
-
-<div class="cell code" data-execution_count="33">
 
 ``` julia
 # Get the difference between expected prices calculated using the weights produced by the Equity Valuation Model and 
@@ -708,23 +622,15 @@ percent_diffs = get_diff_expected_prices(coeffs, raw_test, 2)
 ;
 ```
 
-<div class="output stream stdout">
-
     Calculated valuation for NFLX before bias correction: 2.8286596487435513e9
     Expected (calculated) valuation for NFLX with bias correction: 2.296722593876831e10
     Actual valuation for NFLX: 2.0527299215543518e10
     Bias: -2.0138566290024757e10
-    
+
     Calculated valuation for AAPL before bias correction: 5.561365050864819e11
     Expected (calculated) valuation for AAPL with bias correction: 5.3287233404792444e11
     Actual valuation for AAPL: 6.1334861327025e11
     Bias: 2.3264171038557495e10
-
-</div>
-
-</div>
-
-<div class="cell markdown">
 
 Because of the lack of data, if a company’s value is artificially
 inflated or deflated by public opinion, such as Netflix’s stock, then
@@ -752,10 +658,6 @@ much less (in terms of percent) compared to Netflix. This reduced hype
 can be a result of investors believing that Apple won’t grow or shrink
 exponentially.
 
-</div>
-
-<div class="cell code" data-execution_count="55">
-
 ``` julia
 using CSV, LinearAlgebra
 # Vector to hold the expected return of each company as a percent.
@@ -770,10 +672,6 @@ ix = sortperm(μ)
 # Variable to hold the number of assets.
 nAssets = 306;
 ```
-
-</div>
-
-<div class="cell code" data-execution_count="56">
 
 ``` julia
 # Markowitz Modern Portfolio Model
@@ -816,15 +714,7 @@ function opt_long_portfolio(t1, t2)
 end
 ```
 
-<div class="output execute_result" data-execution_count="56">
-
     opt_long_portfolio (generic function with 1 method)
-
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="57">
 
 ``` julia
 # Markowitz Modern Portfolio Model
@@ -865,27 +755,12 @@ function opt_short_portfolio(t1, t2)
 end
 ```
 
-<div class="output execute_result" data-execution_count="57">
-
     opt_short_portfolio (generic function with 1 method)
 
-</div>
-
-</div>
-
-<div class="cell markdown" data-collapsed="true">
-
-## 4\. Results and Discussion
-
-</div>
-
-<div class="cell markdown">
+4. Results and Discussion
+-------------------------
 
 ### 4.A. Standard Deviations and Expected Returns of Basket of Equities
-
-</div>
-
-<div class="cell code" data-execution_count="58">
 
 ``` julia
 using PyPlot
@@ -922,25 +797,13 @@ tight_layout()
 ;
 ```
 
-<div class="output display_data">
-
 ![](9c377cc0c57d15f285a4d4da86c49bc5cb902aab.png)
-
-</div>
-
-<div class="output display_data">
 
 ![](3853b05326fba4b1f8df7f60c9eb607d0edefb91.png)
 
-</div>
-
-</div>
-
-<div class="cell markdown">
-
 The four plots above show the following:
 
-#### 1\. Expected Daily Return of all Equities (Top-Left):
+#### 1. Expected Daily Return of all Equities (Top-Left):
 
 This plot shows the expected daily return (%) of all equities that could
 make up the optimal portfolio. The equities are in sorted order from low
@@ -952,7 +815,7 @@ the available options to fill the short-only optimal portfolio if we
 weight the expected return term of the objective relatively more than
 the other terms.
 
-#### 2\. Standard Deviation of all Equities (Top-Right):
+#### 2. Standard Deviation of all Equities (Top-Right):
 
 This plot shows the daily standard deviation (%) of all equities. The
 trend of the plot is increasing overall. Since the stocks are sorted in
@@ -961,7 +824,7 @@ hypothesised that stocks with higher variability may also offer higher
 returns. The range of standard deviations for these 306 equities is from
 0.81% to 4.00% per day.
 
-#### 3\. Correlation Matrix of all Equities (Bottom-Left):
+#### 3. Correlation Matrix of all Equities (Bottom-Left):
 
 This plot shows the correlation between each pair of equities. The
 closer the color is to yellow, the more closely correlated the two
@@ -971,21 +834,13 @@ comparisons, it becomes difficult to extract precise conclusions between
 any specific pair of stocks. Overall, it appears many of the stocks are
 fairly correlated (0.4-0.6).
 
-#### 4\. Expected Daily Return vs. Standard Deviation of all Equities (Bottom-Right):
+#### 4. Expected Daily Return vs. Standard Deviation of all Equities (Bottom-Right):
 
 This plot reinforces the observation made from plot 2 that it appears
 that higher returns are associated with higher levels of variation. This
 can be extrapolated from the weak-moderate positive linear trend.
 
-</div>
-
-<div class="cell markdown">
-
 ### 4.B. Optimal Portfolio Examples - Long Positions
-
-</div>
-
-<div class="cell code" data-execution_count="59">
 
 ``` julia
 # Optimal Long-only portfolio generated by just using the Markowitz MPT
@@ -1002,19 +857,9 @@ ixm = ix1
 check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
 ```
 
-<div class="output display_data">
-
 ![](2ca712736e353ae0d2a95007a3cad579dece26a0.png)
 
-</div>
-
-<div class="output stream stdout">
-
     Portfolio returns (percent) 0.22555112327358362
-
-</div>
-
-<div class="output execute_result" data-execution_count="59">
 
     22×5 DataFrame. Omitted printing of 2 columns
     │ Row │ Companies │ Valuation_when_bought │ Valuation_when_sold │
@@ -1043,12 +888,6 @@ check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
     │ 21  │ ROST      │ 1.44685e10            │ 1.89724e10          │
     │ 22  │ SHW       │ 2.54484e10            │ 2.40404e10          │
 
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="60">
-
 ``` julia
 # Optimal Long-only portfolio generated using the Markowitz MPT and results from Valuation Model
 
@@ -1059,19 +898,9 @@ check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
 check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
 ```
 
-<div class="output display_data">
-
 ![](7bef37e230f44824fb4888ebe9ddff9647348cf8.png)
 
-</div>
-
-<div class="output stream stdout">
-
     Portfolio returns (percent) 0.2309653610517507
-
-</div>
-
-<div class="output execute_result" data-execution_count="60">
 
     9×5 DataFrame. Omitted printing of 2 columns
     │ Row │ Companies │ Valuation_when_bought │ Valuation_when_sold │
@@ -1086,12 +915,6 @@ check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
     │ 7   │ NFLX      │ 2.05273e10            │ 4.83713e10          │
     │ 8   │ PPL       │ 2.39035e10            │ 2.30462e10          │
     │ 9   │ RRC       │ 8.89966e9             │ 4.09412e9           │
-
-</div>
-
-</div>
-
-<div class="cell markdown">
 
 The first portfolio above shows what an optimized portfolio using purely
 MPT approach would look like. When using a trade-off weight of 0.1 for
@@ -1111,25 +934,13 @@ returned 23.10%.
 In this example, the enhanced returns were nearly negligible; however,
 we can change the trade-off weights for different results.
 
-</div>
-
-<div class="cell markdown">
-
 ### 4.C. Optimal Portfolio Examples - Short Positions
-
-</div>
-
-<div class="cell markdown">
 
 **Note:** Negative "Portfolio Returns" for a short porfolio denote a
 profit (since stocks were sold at higher level than they were later
 covered). Positive returns denote a loss on investement. We are not
 including potential borrowing rates since the investor does not own
 stock when shorting assets and must borrow them.
-
-</div>
-
-<div class="cell code" data-execution_count="61">
 
 ``` julia
 # Optimal Short-only portfolio generated by just using the Markowitz MPT
@@ -1141,19 +952,9 @@ stock when shorting assets and must borrow them.
 check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
 ```
 
-<div class="output display_data">
-
 ![](e9eb867f4addb36c46ee912ce49de057d6b47481.png)
 
-</div>
-
-<div class="output stream stdout">
-
     Portfolio returns (percent) 0.022990736119473786
-
-</div>
-
-<div class="output execute_result" data-execution_count="61">
 
     15×5 DataFrame. Omitted printing of 2 columns
     │ Row │ Companies │ Valuation_when_bought │ Valuation_when_sold │
@@ -1175,12 +976,6 @@ check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
     │ 14  │ T         │ 1.81838e11            │ 1.93756e11          │
     │ 15  │ WMT       │ 2.44188e11            │ 2.74266e11          │
 
-</div>
-
-</div>
-
-<div class="cell code" data-execution_count="62">
-
 ``` julia
 # Optimal Short-only portfolio generated using the Markowitz MPT and results from Valuation Model
 
@@ -1191,19 +986,9 @@ check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
 check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
 ```
 
-<div class="output display_data">
-
 ![](83d5e8b0ed408e711b5fd22444de42f9b1797bce.png)
 
-</div>
-
-<div class="output stream stdout">
-
     Portfolio returns (percent) -0.2801032203318026
-
-</div>
-
-<div class="output execute_result" data-execution_count="62">
 
     8×5 DataFrame. Omitted printing of 2 columns
     │ Row │ Companies │ Valuation_when_bought │ Valuation_when_sold │
@@ -1217,12 +1002,6 @@ check_profits(ix1, 100000, raw_test[77:78], raw_val[77:78], xsol1)
     │ 6   │ OKE       │ 1.04263e10            │ 5.16336e9           │
     │ 7   │ R         │ 4.89685e9             │ 3.01217e9           │
     │ 8   │ SYMC      │ 1.37763e10            │ 1.6281e10           │
-
-</div>
-
-</div>
-
-<div class="cell markdown">
 
 The first portfolio above shows what an optimized portfolio using purely
 MPT approach would look like. When using a trade-off weight of 0.1 for
@@ -1245,15 +1024,7 @@ In this example, the enhanced returns were quite signifigant and the
 addition of the valuation model proved to be quite successful. Again, we
 can change the trade-off weights for different results.
 
-</div>
-
-<div class="cell markdown">
-
 ### 4.D. Pareto Frontier
-
-</div>
-
-<div class="cell code" data-execution_count="63">
 
 ``` julia
 # compute optimal tradeoff curve (this may take a few minutes)
@@ -1277,10 +1048,6 @@ for (i,λ) in enumerate(lambda_values)
 end
 ```
 
-</div>
-
-<div class="cell code" data-execution_count="64">
-
 ``` julia
 # plot tradeoff curve
 plot(std,ret,"b-")
@@ -1292,15 +1059,7 @@ ylabel("expected return (%)")
 tight_layout()
 ```
 
-<div class="output display_data">
-
 ![](3bbef92067688b7c05e00f590387b8844ff7b9b7.png)
-
-</div>
-
-</div>
-
-<div class="cell markdown">
 
 The above plot shows the expected returns of the basket of stocks versus
 their respective standard deviation (or risk). The blue curve shows the
@@ -1313,10 +1072,6 @@ based on their risk tolerance.
 The points in red are the stocks chosen for an optimal Markowitz MPT
 portfolio with the trade off of 0.1 for risk (The first long portfolio
 we generated above).
-
-</div>
-
-<div class="cell markdown">
 
 ### 4.E Accuracy of Models and Possible Improvements
 
@@ -1357,11 +1112,8 @@ The years that our sample data was collected ranged between 2012 to
 financial crisis; thus, our model may not be suitable for all market
 conditions.
 
-</div>
-
-<div class="cell markdown" data-collapsed="true">
-
-## 5\. Conclusion
+5. Conclusion
+-------------
 
 This optimization project explores the task of attempting to accurately
 value a company’s stock, and then use that valuation in a Markowitz
@@ -1395,7 +1147,8 @@ only exist for theoretical exploration and all conjecture is purely
 academic. Hypothetical or simulated performance is not indicative of any
 future results.
 
-## 6\. References
+6. References
+-------------
 
 Chen, James. “Modern Portfolio Theory (MPT).” Investopedia,
 Investopedia, 17 Apr. 2019,
@@ -1411,5 +1164,3 @@ Surz, Ron. “U.S. Stock Market Is Biggest & Most Expensive In World, But
 U.S. Economy Is Not The Most Productive.” NASDAQ.com, Nasdaq, 2 Apr.
 2018,
 www.nasdaq.com/article/us-stock-market-is-biggest-most-expensive-in-world-but-us-economy-is-not-the-most-productive-cm942558.
-
-</div>
